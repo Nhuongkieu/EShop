@@ -8,25 +8,29 @@ namespace TeduShop.Data.Infrastructure
 {
     public class Disposable : IDisposable
     {
-        private bool isDispose;
+        private bool isDisposed;
+
         ~Disposable()
         {
             Dispose(false);
         }
+
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-
         private void Dispose(bool disposing)
         {
-            if(isDispose&& disposing)
+            if (!isDisposed && disposing)
             {
                 DisposeCore();
             }
-            isDispose = true;
+
+            isDisposed = true;
         }
+
+        // Ovveride this to dispose custom objects
         protected virtual void DisposeCore()
         {
         }

@@ -8,16 +8,19 @@ namespace TeduShop.Data.Infrastructure
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly IDbFactoty dbFactoty;
+        private readonly IDbFactory dbFactory;
         private TeduShopDbContext dbContext;
-        public UnitOfWork(IDbFactoty dbFactoty)
+
+        public UnitOfWork(IDbFactory dbFactory)
         {
-            this.dbFactoty = dbFactoty;
+            this.dbFactory = dbFactory;
         }
+
         public TeduShopDbContext DbContext
         {
-            get { return dbContext ?? (dbContext = dbFactoty.Init()); }
+            get { return dbContext ?? (dbContext = dbFactory.Init()); }
         }
+
         public void Commit()
         {
             DbContext.SaveChanges();
