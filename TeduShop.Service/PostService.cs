@@ -16,6 +16,7 @@ namespace TeduShop.Service
         void Delete(int id);
         IEnumerable<Post> GetAll();
         IEnumerable<Post> GetAllPagging(int page, int pageSize, out int totalRow);
+        IEnumerable<Post> GetAllByCategoryPagging(int categoryId,int page, int pageSize, out int totalRow);
         Post GetById(int id);
         IEnumerable<Post> GetAllByTagPagging(string tag,int page, int pageSize, out int totalRow);
         void SaveChanges();
@@ -46,10 +47,15 @@ namespace TeduShop.Service
             return _postRepository.GetAll(new string[] { "PostCategory" });
         }
 
-        public IEnumerable<Post> GetAllByTagPagging(string tag,int page, int pageSize, out int totalRow)
+        public IEnumerable<Post> GetAllByCategoryPagging(int categoryId, int page, int pageSize, out int totalRow)
+        {
+            return _postRepository.GetMultiPaging(x => x.Status && x.CategoryID == categoryId, out totalRow, page, pageSize, new string[] { "PostCategory" });
+        }
+
+        public IEnumerable<Post> GetAllByTagPagging(string tag,int pageIndex, int pageSize, out int totalRow)
         {
             //TODO: Select all post by tag
-            return _postRepository.GetMultiPaging(x => x.Status, out totalRow, page, pageSize);
+            return _postRepository.GetAllByTag(tag,pageIndex,pageSize,out totalRow);
         }
 
         public IEnumerable<Post> GetAllPagging(int page, int pageSize, out int totalRow)
@@ -59,17 +65,17 @@ namespace TeduShop.Service
 
         public Post GetById(int id)
         {
-            throw new NotImplementedException();
+            return _postRepository.GetSingleById(id);
         }
 
         public void SaveChanges()
         {
-            throw new NotImplementedException();
+            _unitOfWork.Commit();
         }
 
         public void Update(Post post)
         {
-            throw new NotImplementedException();
+            this._postRepository.Update(post);
         }
     }
 }
