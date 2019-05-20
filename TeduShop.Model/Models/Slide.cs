@@ -1,5 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace TeduShop.Model.Models
 {
@@ -8,23 +13,25 @@ namespace TeduShop.Model.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { set; get; }
+        public int ID { get; set; }
 
         [Required]
         [MaxLength(256)]
-        public string Name { set; get; }
+        public string Name { get; set; }
 
         [MaxLength(256)]
-        public string Description { set; get; }
+        public string Description { get; set; }
 
+        [Required]
         [MaxLength(256)]
-        public string Image { set; get; }
+        public string Images { get; set; }
 
+        [Required]
         [MaxLength(256)]
-        public string Url { set; get; }
+        public string URL { get; set; }
 
-        public int? DisplayOrder { set; get; }
+        public int? DisplayOrder { get; set; }
 
-        public bool Status { set; get; }
+        public bool Status { get; set; }
     }
 }
