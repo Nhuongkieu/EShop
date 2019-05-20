@@ -1,17 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace TeduShop.Model.Abstract
 {
     public interface IAuditable
     {
-        DateTime? CreatedDate { set; get; }
-        string CreatedBy { set; get; }
-        DateTime? UpdatedDate { set; get; }
-        string UpdatedBy { set; get; }
+        string MetaKeyword { get; set; }
+        string MetaDescription { get; set; }
 
-        string MetaKeyword { set; get; }
-        string MetaDescription { set; get; }
+        DateTime? CreatedDate { get; set; }
+        string Createdby { get; set; }
+        DateTime? UpdatedDate { get; set; }
+        string UpdatedBy { get; set; }
 
-        bool Status { set; get; }
+        bool Status { get; set; }
+
     }
 }

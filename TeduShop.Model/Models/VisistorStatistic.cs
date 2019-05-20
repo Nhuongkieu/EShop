@@ -8,14 +8,16 @@ using System.Threading.Tasks;
 
 namespace TeduShop.Model.Models
 {
-    [Table("Footers")]
-    public class Footer
+    [Table("VisistorStatistics")]
+    public class VisistorStatistic
     {
         [Key]
-        [MaxLength(50)]
-        public string ID { get; set; }
-
+        public Guid ID { get; set; }
+        
         [Required]
-        public string Content { get; set; }
+        public DateTime VistedDate { get; set; }
+
+        [MaxLength(50)]
+        public string IPAddress { get; set; }
     }
 }
